@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+<div id='tablebody'>
+    <table>
+        <tr>
+            <td>게시판번호</td><td>등록일</td><td>제목</td><td>대상회사</td><td>제출자</td><td>링크</td>
+        </tr>
+    </table>
+</div>
+
+
+
+<script>
+
+
+$(function(){
+	
+	$.ajax({
+		  method: "GET",
+		  url: "board/list",
+		  success : function(result){
+			    var str = '';
+			    
+			    $.each(result.board, function(index,list){
+			    	str += '<tr>';
+			    	str += '<td>'+list.boardNo+'</td><td>'+list.updateDate+'</td><td>'+list.title+'</td><td>'+list.targetCompany+'</td><td>'+list.submitter+'</td><td>'+list.link+'</td>';
+			    	str +='</tr>'
+			    })
+			    
+			   $("#tablebody table").append(str);
+		  
+		  },
+		  error : function(err){
+			  console.log(err);
+		  }
+	}); // ajax
+	
+});
+
+
+</script>
+</body>
+</html>

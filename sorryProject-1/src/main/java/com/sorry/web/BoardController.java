@@ -31,6 +31,7 @@ public class BoardController {
         ResponseEntity <Object> responseEntity;
         responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
         result.put("board", board);
+        result.put("result", "success");
 
         return responseEntity;
     }

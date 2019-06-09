@@ -16,6 +16,14 @@
     <select id="selectList" resultMap="boardList">
         SELECT * FROM TB_BOARD
     </select>
+    
+    <select id="isExist" parameterType="String">
+        SELECT COUNT(*) FROM TB_BOARD WHERE REMARKS = #{remarks}
+    </select>
+
+    <insert id="insert" parameterType="ApiVO">
+        INSERT INTO TB_BOARD(READ_FLAG,UPDATE_DT,TAR_COMP,TITLE,REMARKS,SUBMITTER,LINK,REGDT) values()
+    </insert>    
 </mapper>  
 
 

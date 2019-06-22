@@ -17,12 +17,13 @@
         SELECT * FROM TB_BOARD
     </select>
     
-    <select id="isExist" parameterType="String">
+    <select id="isExist" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM TB_BOARD WHERE REMARKS = #{remarks}
     </select>
 
     <insert id="insert" parameterType="ApiVO">
-        INSERT INTO TB_BOARD(READ_FLAG,UPDATE_DT,TAR_COMP,TITLE,REMARKS,SUBMITTER,LINK,REGDT) values()
+        INSERT INTO TB_BOARD(READ_FLAG,UPDATE_DT,TAR_COMP,TITLE,REMARKS,SUBMITTER,LINK,REGDT) 
+        values(0,#{rcp_dt},#{crp_nm},#{rpt_nm},#{rmk},#{flr_nm},null,now());
     </insert>    
 </mapper>  
 

@@ -10,7 +10,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig;
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 
 @SpringBootApplication
-(scanBasePackages={"com.sorry.*,SQLMap.mapper.board"})
+(scanBasePackages={"com.sorry.*,SQLMap.mapper.*"})
 public class SorryProject1Application {
 
 	public static void main(String[] args) {

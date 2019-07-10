@@ -16,9 +16,8 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 @Service
 public class CrawlerServiceImpl implements CrawlerService{
     
-    @Autowired 
-    CrawlerDAO crawlerDAO;
-    
+//    @Autowired 
+//    CrawlerDAO crawlerDAO;
     @Override
     public int insertCrawValue(String rcpNo) {
         int numberOfCrawlers = 1;
@@ -27,6 +26,7 @@ public class CrawlerServiceImpl implements CrawlerService{
         config.setCrawlStorageFolder("/data/craw/root");
         config.setIncludeBinaryContentInCrawling(false);
         config.setPolitenessDelay(10);
+        config.setIncludeHttpsPages(false);
         
         try {
             PageFetcher pageFetcher = new PageFetcher(config);
@@ -35,11 +35,9 @@ public class CrawlerServiceImpl implements CrawlerService{
             RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig,pageFetcher);
             
             CrawlController controller = new CrawlController(config, pageFetcher, robotstxtServer);
-            controller.addSeed("http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20190628000367");
-            controller.start(CrawlingService.class, numberOfCrawlers);
-            int result = crawlerDAO.insert(GlobalVO.crawlerVO);
-            System.out.println(result);
-            controller.shutdown();
+//            controller.addSeed("http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20190628000367");
+            controller.addSeed("http://dart.fss.or.kr/report/viewer.do?rcpNo=20190628000367&dcmNo=6790573&eleId=15&offset=172334&length=47071&dtd=dart3.xsd");
+            controller.startNonBlocking(CrawlingService.class, numberOfCrawlers);
         } catch (Exception e) {
             e.printStackTrace();
         }

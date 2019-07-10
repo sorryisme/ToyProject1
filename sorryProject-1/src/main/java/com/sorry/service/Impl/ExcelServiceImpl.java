@@ -29,11 +29,12 @@ public class ExcelServiceImpl implements ExcelService{
         
         //당년 영업이익, 전년도 영업이익 값을 가져오기
         double cell1 = getNumeric(getCell(rows,1));
-        double cell2 = getNumeric(getCell(rows,2));
+        double cell2 = getNumeric(getCell(rows,3));
         
         BigDecimal currentProfit = parseToDecimal(cell1); 
         BigDecimal lastProfit = parseToDecimal(cell2);
-        
+        System.out.println(currentProfit);
+        System.out.println(lastProfit);
         ExcelVO vo = new ExcelVO();
         vo.setCurrentProfit(currentProfit);
         vo.setLastProfit(lastProfit);
@@ -48,7 +49,7 @@ public class ExcelServiceImpl implements ExcelService{
         HSSFWorkbook result = null;
         
         try { 
-        FileInputStream fis = new FileInputStream("c:\\test\\excel\\"+ fileName +"_ko.xls");
+        FileInputStream fis = new FileInputStream("c:\\test\\excel\\"+ fileName +".xls");
         result = new HSSFWorkbook(fis);
         } catch (Exception e) {
             e.printStackTrace();

@@ -448,7 +448,56 @@
     {{/each}}
   </script>
   <script src="js/handlebars.js"></script>
+  <script type="text/javascript">
+  window.onload = function () {
+      if (window.Notification) {
+          Notification.requestPermission();
+      }
+  }
+
+    function calculate() {
+        setTimeout(function () {
+            notify();
+        }, 1000);
+    }
+
+    function notify() {
+        if (Notification.permission !== 'granted') {
+            alert('권한을 허용해줘야 사용 가능합니다.');
+        }
+        else {
+            var notification = new Notification('새로 등록된 보고서가 있습니다', {
+                icon: './img/cat.png',
+                body: '새로 등록된 보고서가 있습니다',
+            });
+
+            notification.onclick = function () {
+                window.open('./tables.html');
+            };
+        }
+    }
+    //Notification End 
+    
   
+  $(function(){
+	  $.ajax({
+		  method: "GET",
+		  url:"/sorry/board/insert",
+		  success:function(){
+			  calculate();
+		  },
+		  error:function(err){
+		  }
+	  });
+  }); 
+//DocumentReady End
+  
+  
+  
+  
+</script>
+
+
 </body>
 
 </html>

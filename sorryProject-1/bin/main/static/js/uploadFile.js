@@ -16,7 +16,7 @@ function getFileInfo(fullName){
 		var end = fullName.substr(14);
 		getLink = "/displayFile?fileName="+front+end;
 	} else {
-		imgsrc ="/resources/dist/default-50x50.gif";
+		imgsrc ="./img/excelFile.png";
 		fileLink = fullName.substr(12);
 		getLink="/displayFile?fileName="+fullName;
 	}

@@ -1,19 +1,27 @@
 package com.sorry.service.Impl;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sorry.dao.ExcelDAO;
 import com.sorry.service.ExcelService;
 import com.sorry.web.vo.ExcelVO;
 
 @Service
 public class ExcelServiceImpl implements ExcelService{
+    
+    @Autowired
+    ExcelDAO excelDAO;
     
     /**
      * @param fileName(dart 정보)
@@ -33,23 +41,24 @@ public class ExcelServiceImpl implements ExcelService{
         
         BigDecimal currentProfit = parseToDecimal(cell1); 
         BigDecimal lastProfit = parseToDecimal(cell2);
-        System.out.println(currentProfit);
-        System.out.println(lastProfit);
         ExcelVO vo = new ExcelVO();
         vo.setCurrentProfit(currentProfit);
         vo.setLastProfit(lastProfit);
         vo.setRemark(remark);
-        
-        
-        
-        return 0;
+        int result = excelDAO.insert(vo);
+        System.out.println(vo.toString());
+        return result;
     }
     
     public HSSFWorkbook fileToWorkbook(String fileName) {
         HSSFWorkbook result = null;
-        
+        Calendar cal = Calendar.getInstance();
+        String yearPath = File.separator+cal.get(Calendar.YEAR);
+        String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
+        String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
+        System.out.println(datePath);
         try { 
-        FileInputStream fis = new FileInputStream("c:\\test\\excel\\"+ fileName +".xls");
+        FileInputStream fis = new FileInputStream("c:\\test\\upload\\"+datePath+ fileName +".xls");
         result = new HSSFWorkbook(fis);
         } catch (Exception e) {
             e.printStackTrace();

@@ -124,6 +124,7 @@
             success: function(data){
                 
                 var fileInfo = getFileInfo(data);
+                console.log(fileInfo);
                 var html = template(fileInfo);
                 $(".uploadedList").append(html);
             }
@@ -142,7 +143,7 @@
         });
         
         that.append(str);
-        console.log(that.get(0));
+//         console.log(that.get(0));
         that.get(0).submit();
         
     });

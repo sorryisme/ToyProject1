@@ -43,24 +43,18 @@
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
               <form class="user" method="post" id="registerForm">
-                <div class="form-group">
-                    <ul class="mailbox-attachments clerfix uploadedList"></ul>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <label for="exampleInputEmail1">File Drop here</label>
-                    <div class="fileDrop"></div>
-                     </div>
-                     
-                </div>
-               <button type="submit" class="btn btn-primary btn-user btn-block">submit</button>
-                <hr>
-                <a href="index.html" class="btn btn-google btn-user btn-block">
-                  <i class="fab fa-google fa-fw"></i> Register with Google
-                </a>
-                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                  <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                </a>
+	                <div class="form-group">
+	                    <ul class="mailbox-attachments clerfix uploadedList"></ul>
+	                </div>
+	                <div class="form-group row">
+	                  <div class="col-sm-6">
+	                    <label for="exampleInputEmail1">File Drop here</label>
+	                    <div class="fileDrop"></div>
+	                     </div>
+	                     
+	                </div>
+	               <button type="submit" class="btn btn-primary btn-user btn-block">submit</button>
+	                <hr>
               </form>
               <hr>
               <div class="text-center">
@@ -136,15 +130,24 @@
         
         var that = $(this);
         
-        var str = "";
+//      var str = "";
+        var str = [];
         
-        $(".uploadedList .delBtn").each(function(index){
-            str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>"; 
+        
+        $(".uploadedList li").each(function(index){
+        	str.push($(this).text().trim());
         });
         
-        that.append(str);
-//         console.log(that.get(0));
-        that.get(0).submit();
+            $.ajax({
+                url : "/sorry/board/excelInsert",
+                type : "POST",
+                data : {"fileName":str},
+                dataType : "text",
+                async :false,
+                success : function(result){
+                	console.log("완료")
+                }
+            });
         
     });
     

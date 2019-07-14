@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sorry.service.BoardService;
@@ -53,9 +54,11 @@ public class BoardController {
 
     
     @RequestMapping("/excelInsert")
-    public ResponseEntity<Object> excelInsert() {
+    public ResponseEntity<Object> excelInsert(@RequestParam("fileName[]") String[] fileName) {
         Map<String, Object> result = new HashMap<>();
-//        excelService.insert();
+        for(String fileStr :fileName) {
+            excelService.insertExcel(fileStr);
+        }
         ResponseEntity <Object> responseEntity;
         responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
         result.put("result", "success");

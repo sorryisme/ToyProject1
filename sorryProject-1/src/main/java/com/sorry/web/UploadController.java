@@ -38,9 +38,6 @@ private static final Logger logger = LoggerFactory.getLogger(UploadController.cl
     
     @RequestMapping(value="/uploadForm", method = RequestMethod.POST)
     public String uploadFormPOST(MultipartFile file, Model model) throws Exception{
-        logger.info("originalName" + file.getOriginalFilename());
-        logger.info("size" + file.getSize());
-        logger.info("contentType" + file.getContentType());
         
         String savedName = uploadFile(file.getOriginalFilename(),file.getBytes()); 
         model.addAttribute("savedName", savedName);
@@ -49,13 +46,10 @@ private static final Logger logger = LoggerFactory.getLogger(UploadController.cl
     
     private String uploadFile(String originalName, byte[] fileDate) throws Exception{
         
-        UUID uid = UUID.randomUUID();
-        String savedName = uid.toString() + "_" + originalName;
-        File target = new File(uploadPath,savedName);
-        
+        File target = new File(uploadPath,originalName);
         FileCopyUtils.copy(fileDate, target);
         
-        return savedName;
+        return originalName;
     }
     
     @RequestMapping(value = "/uploadAjax" ,method = RequestMethod.GET)
@@ -87,9 +81,8 @@ private static final Logger logger = LoggerFactory.getLogger(UploadController.cl
                 headers.setContentType(mType);
             } else {
                 
-                fileName = fileName.substring(fileName.indexOf("_"));
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-                headers.add("Content-disposition", "attachment; filenmae=\""+ new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+                headers.add("Content-disposition", "attachment; filename=\""+ new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
             }
             
             entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),headers,HttpStatus.CREATED);

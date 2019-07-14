@@ -28,7 +28,7 @@ public class ExcelServiceImpl implements ExcelService{
      * @return insert amt
      * */
     @Override
-    public int insertExcel (String fileName, String remark) {
+    public int insertExcel (String fileName) {
         HSSFWorkbook workBook = fileToWorkbook(fileName);
         //3번째 시트를 가져오기
         HSSFSheet sheet = getSheet(workBook, 2);
@@ -44,10 +44,10 @@ public class ExcelServiceImpl implements ExcelService{
         ExcelVO vo = new ExcelVO();
         vo.setCurrentProfit(currentProfit);
         vo.setLastProfit(lastProfit);
-        vo.setRemark(remark);
-        int result = excelDAO.insert(vo);
-        System.out.println(vo.toString());
-        return result;
+        System.out.println(currentProfit);
+        System.out.println(lastProfit);
+//        int result = excelDAO.insert(vo);
+        return 0;
     }
     
     public HSSFWorkbook fileToWorkbook(String fileName) {
@@ -56,9 +56,8 @@ public class ExcelServiceImpl implements ExcelService{
         String yearPath = File.separator+cal.get(Calendar.YEAR);
         String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
         String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
-        System.out.println(datePath);
         try { 
-        FileInputStream fis = new FileInputStream("c:\\test\\upload\\"+datePath+ fileName +".xls");
+        FileInputStream fis = new FileInputStream("c:\\test\\upload\\"+datePath+"\\"+ fileName +"_ko.xls");
         result = new HSSFWorkbook(fis);
         } catch (Exception e) {
             e.printStackTrace();

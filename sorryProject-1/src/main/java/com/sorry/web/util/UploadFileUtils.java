@@ -19,9 +19,8 @@ public class UploadFileUtils {
 	
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
 		
-		UUID uid = UUID.randomUUID();
 		
-		String savedName = uid.toString()+"_"+originalName;
+		String savedName = originalName;
 		
 		String savedPath = calcPath(uploadPath);
 		
@@ -47,7 +46,6 @@ public class UploadFileUtils {
 		String iconName = uploadPath + path + File.separator + fileName;
 		return iconName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	} 
-	
 	private static String calcPath(String uploadPath) {
 		
 		Calendar cal = Calendar.getInstance();
@@ -65,7 +63,6 @@ public class UploadFileUtils {
 	}
 	
 	private static void makeDir(String uploadPath, String... paths) {
-	
 		if(new File(paths[paths.length-1]).exists()) {
 			return;
 		}

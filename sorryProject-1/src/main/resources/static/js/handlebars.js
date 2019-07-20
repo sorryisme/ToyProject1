@@ -7,7 +7,6 @@ var printData = (list, target, templateObject) => {
 
 var successFunction = function (data){
 	if(data.result === 'success'){
-		console.log($('#dataTable').html());
      	    $('#dataTable').dataTable();
 	}
 }

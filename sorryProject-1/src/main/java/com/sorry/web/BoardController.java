@@ -43,15 +43,19 @@ public class BoardController {
     }
 
     @RequestMapping("/insert")
-    public ResponseEntity<Object> boardInsert() {
+    public Object boardInsert() {
         Map<String, Object> result = new HashMap<>();
-        dartAPIservice.insert();
-        ResponseEntity <Object> responseEntity;
-        responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
-        result.put("result", "success");
-        return responseEntity;
-    }
 
+        int resultCount = dartAPIservice.insert();
+        
+        if( resultCount > 0 ) {
+            result.put("result", "success");
+        } else {
+            result.put("result", "fail");
+        }
+        
+        return result;
+    }
     
     @RequestMapping("/excelInsert")
     public ResponseEntity<Object> excelInsert(@RequestParam("fileName[]") String[] fileName) {

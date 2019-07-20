@@ -31,8 +31,11 @@ public class DartAPIServiceImpl implements DartAPIService{
     public int insert() {
         
         RestTemplate restTemplate = new RestTemplate();
-        String restUrl = URL + getToday() + URL2;
-        String str = restTemplate.getForObject(URL , String.class);
+        String restUrl = URL + 
+//                getToday() 
+                "20190717"
+                + URL2;
+        String str = restTemplate.getForObject(restUrl , String.class);
       
         ResultVO result = parse2VO(str);
         Iterator<ApiVO> it =toIterator(result.getList());

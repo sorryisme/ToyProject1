@@ -22,8 +22,8 @@
     </select>
 
     <insert id="insert" parameterType="ApiVO">
-        INSERT INTO TB_BOARD(READ_FLAG,UPDATE_DT,TAR_COMP,TITLE,REMARKS,SUBMITTER,LINK,REGDT) 
-        values(0,#{rcp_dt},#{crp_nm},#{rpt_nm},#{rmk},#{flr_nm},null,now());
+        INSERT INTO TB_BOARD(READ_FLAG,UPDATE_DT,TAR_COMP,TITLE,REMARKS,SUBMITTER,LINK,REGDT,crp_cd,rcp_no,rcp_dt) 
+        values(0,#{rcp_dt},#{crp_nm},#{rpt_nm},#{rmk},#{flr_nm},null,now(),#{crp_cd},#{rcp_no},#{rcp_dt});
     </insert>    
 </mapper>  
 

@@ -3,19 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.sorry.dao.CrawlerDAO">
-    <insert id="insert" parameterType="CrawlerVO">
-        INSERT INTO cralwerData(
-             rcpNo
-            ,dcmNo
-            ,offset_no
-            ,length_no
-        )values(
-            #{rcpNo}
-           ,#{dcmNo}
-           ,#{offset_no}
-           ,#{length_no}
-        )
+<mapper namespace="com.sorry.dao.ExcelDAO">
+    <insert id="updateProfit" parameterType="ExcelVO">
+        update tb_board set 
+             currentProfit = #{currentProfit},
+             lastProfit = #{lastProfit}
+        where rcp_no = #{rcp_no}
     </insert>    
 </mapper>  
 

@@ -6,7 +6,7 @@ import com.sorry.web.vo.ExcelVO;
 
 @Mapper
 public interface ExcelDAO {
-
-    public int insert(ExcelVO excelVO);
+    
+    public int updateProfit(ExcelVO excelVO);
     
 }

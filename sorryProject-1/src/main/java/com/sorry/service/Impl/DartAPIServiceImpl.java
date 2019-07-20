@@ -53,6 +53,7 @@ public class DartAPIServiceImpl implements DartAPIService{
                 vo.setRmk(remarks);
                 boardDAO.insert(vo);
                 count ++;
+                logger.info("삽입 완료하였습니다."+ count);
             }
         }
         

@@ -44,10 +44,12 @@ public class ExcelServiceImpl implements ExcelService{
         ExcelVO vo = new ExcelVO();
         vo.setCurrentProfit(currentProfit);
         vo.setLastProfit(lastProfit);
+        vo.setRcp_no(fileName);
+        
         System.out.println(currentProfit);
         System.out.println(lastProfit);
-//        int result = excelDAO.insert(vo);
-        return 0;
+        int result = excelDAO.updateProfit(vo);
+        return result;
     }
     
     public HSSFWorkbook fileToWorkbook(String fileName) {

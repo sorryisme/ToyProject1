@@ -1,5 +1,7 @@
 package com.sorry.web.vo;
 
+import java.math.BigDecimal;
+
 public class BoardVO {
     
     int boardNo;
@@ -11,6 +13,8 @@ public class BoardVO {
     String submitter;
     String link;
     String regDate;
+    BigDecimal currentProfit;
+    BigDecimal lastProfit;
     
     public int getBoardNo() {
         return boardNo;
@@ -66,5 +70,16 @@ public class BoardVO {
     public void setRegDate(String regDate) {
         this.regDate = regDate;
     }
-
+    public BigDecimal getCurrentProfit() {
+        return currentProfit;
+    }
+    public void setCurrentProfit(BigDecimal currentProfit) {
+        this.currentProfit = currentProfit;
+    }
+    public BigDecimal getLastProfit() {
+        return lastProfit;
+    }
+    public void setLastProfit(BigDecimal lastProfit) {
+        this.lastProfit = lastProfit;
+    }
 }

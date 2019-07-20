@@ -354,6 +354,8 @@
                       <th>대상회사</th>
                       <th>제출자</th>
                       <th>링크</th>
+                      <th>이번 분기 수익</th>
+                      <th>작년 분기 수익</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -364,6 +366,8 @@
                       <th>대상회사</th>
                       <th>제출자</th>
                       <th>링크</th>
+                      <th>이번 분기 수익</th>
+                      <th>작년 분기 수익</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -444,6 +448,8 @@
         <td>{{targetCompany}}</td>
         <td>{{submitter}}</td>
         <td>{{link}}</td>
+        <td>{{currentProfit}}</td>
+        <td>{{lastProfit}}</td>
       </tr>
     {{/each}}
   </script>
@@ -455,20 +461,36 @@
       }
   }
 
+  $(function(){
+		   if (Notification.permission === 'granted') {
+		          calculate();
+	       }
+  }); 
+	//documentReady End
+	  
+	
+    function callBackAjaxFunc(){
+		
+    	   $.ajax({
+               method: "GET",
+               url: "/sorry/board/insert",
+               async : false,
+               success: function(data){
+                   if(data.resultCount > 0 ){
+	                   notify();
+                   }
+                   
+               }
+         });
+    	   
+    }
+	
     function calculate() {
-        setTimeout(function () {
-        	$.ajax({
-        		  method: "GET",
-        		  url: "/sorry/board/insert",
-        		  success: function(result){
-        			  console.log(result);
-        		  }
-        	});
-        	//notify();
-        }, 1000);
+        setTimeout(callBackAjaxFunc(), 20000);
     }
 
     function notify() {
+    	
         if (Notification.permission !== 'granted') {
             alert('권한을 허용해줘야 사용 가능합니다.');
         }
@@ -486,18 +508,7 @@
     //Notification End 
     
   
-  $(function(){
-	  $.ajax({
-		  method: "GET",
-		  url:"/sorry/board/insert",
-		  success:function(){
-			  calculate();
-		  },
-		  error:function(err){
-		  }
-	  });
-  }); 
-//DocumentReady End
+
   
   
   

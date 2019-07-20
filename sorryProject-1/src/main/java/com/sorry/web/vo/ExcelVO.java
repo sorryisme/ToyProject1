@@ -7,6 +7,7 @@ public class ExcelVO {
     String remark;
     BigDecimal currentProfit;
     BigDecimal lastProfit;
+    String rcp_no;
     
     public String getRemark() {
         return remark;
@@ -26,15 +27,23 @@ public class ExcelVO {
     public void setLastProfit(BigDecimal lastProfit) {
         this.lastProfit = lastProfit;
     }
+    public String getRcp_no() {
+        return rcp_no;
+    }
+    public void setRcp_no(String rcp_no) {
+        this.rcp_no = rcp_no;
+    }
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ExcelVO [remark=");
-        builder.append(remark);
-        builder.append(", currentProfit=");
+        builder.append("ExcelVO [currentProfit=");
         builder.append(currentProfit);
         builder.append(", lastProfit=");
         builder.append(lastProfit);
+        builder.append(", rcp_no=");
+        builder.append(rcp_no);
+        builder.append(", remark=");
+        builder.append(remark);
         builder.append("]");
         return builder.toString();
     }
